@@ -30,7 +30,7 @@ bot.interaction_create(type: Discordrb::Interaction::TYPES[:command]) do |event|
     else
       # レコードがない場合は、新規作業開始として挿入
       db.execute(INSERT_LOG_QUERY, [user.id, now])
-      message = "@#{user.username} 作業開始 #{now}"
+      message = "@#{user.username} 作業開始"
     end
   
     event.respond(content: message)
