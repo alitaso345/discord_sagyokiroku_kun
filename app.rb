@@ -1,6 +1,7 @@
 require 'discordrb'
 require 'dotenv/load'
 require 'sqlite3'
+require 'logger'
 
 DB_PATH = 'test.db'
 SELECT_LATEST_LOG_QUERY = "SELECT * FROM activity_logs WHERE user_id = ? AND end_at IS NULL ORDER BY start_at DESC LIMIT 1".freeze
@@ -9,6 +10,9 @@ INSERT_LOG_QUERY = "INSERT INTO activity_logs(user_id, start_at) VALUES(?, ?)".f
 
 db = SQLite3::Database.new(DB_PATH)
 bot = Discordrb::Bot.new(token: ENV['DISCORD_TOKEN'])
+logger = Logger.new($stdout)
+
+bot.heartbeat{|event| logger.info("Heartbeat: #{Time.now}")}
 
 bot.interaction_create(type: Discordrb::Interaction::TYPES[:command]) do |event|
   if event.interaction.data['name'] == 'touch'
