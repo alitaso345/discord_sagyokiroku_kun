@@ -16,6 +16,7 @@ GEM
     dotenv (3.1.4)
     event_emitter (0.2.6)
     ffi (1.17.0-arm64-darwin)
+    ffi (1.17.0-x86_64-linux-gnu)
     http-accept (1.7.0)
     http-cookie (1.0.7)
       domain_name (~> 0.5)
@@ -46,6 +47,7 @@ GEM
       mime-types (>= 1.16, < 4.0)
       netrc (~> 0.8)
     sqlite3 (2.2.0-arm64-darwin)
+    sqlite3 (2.2.0-x86_64-linux-gnu)
     stringio (3.1.1)
     websocket (1.2.11)
     websocket-client-simple (0.8.0)
@@ -54,6 +56,7 @@ GEM
 
 PLATFORMS
   arm64-darwin-21
+  x86_64-linux
 
 DEPENDENCIES
   debug
