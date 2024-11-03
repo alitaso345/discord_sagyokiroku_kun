@@ -9,7 +9,7 @@ db = SQLite3::Database.new('test.db')
 
 use DiscordSignatureVerifer, ENV['DISCORD_PUBLIC_KEY']
 
-get '/healthz' do
+get '/' do
   "Health check: #{Time.now}"
 end
 
