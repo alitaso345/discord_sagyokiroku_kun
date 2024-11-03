@@ -1,3 +1,6 @@
+require 'ed25519'
+require 'json'
+
 class DiscordSignatureVerifer
   def initialize(app, public_key)
     @app = app

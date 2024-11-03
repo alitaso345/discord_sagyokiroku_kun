@@ -1,13 +1,7 @@
-require 'sinatra'
-require 'dotenv/load'
-require 'ed25519'
 require 'json'
 require 'sqlite3'
-require_relative 'discord_signature_verifier'
 
 db = SQLite3::Database.new('test.db')
-
-use DiscordSignatureVerifer, ENV['DISCORD_PUBLIC_KEY']
 
 get '/' do
   "Health check: #{Time.now}"
