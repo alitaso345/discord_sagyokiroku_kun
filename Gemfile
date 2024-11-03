@@ -8,6 +8,7 @@ gem 'rackup'
 gem 'sqlite3'
 gem 'ed25519'
 gem 'puma'
+gem 'rake'
 
 group :development do
   gem 'rerun'
