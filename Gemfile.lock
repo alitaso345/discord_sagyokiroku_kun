@@ -7,6 +7,7 @@ GEM
       reline (>= 0.3.8)
     dotenv (3.1.4)
     ed25519 (1.3.0)
+    ffi (1.17.0)
     ffi (1.17.0-aarch64-linux-gnu)
     ffi (1.17.0-aarch64-linux-musl)
     ffi (1.17.0-arm-linux-gnu)
@@ -27,6 +28,7 @@ GEM
     mustermann (3.0.3)
       ruby2_keywords (~> 0.0.1)
     nio4r (2.7.4)
+    pg (1.5.9)
     psych (5.1.2)
       stringio
     puma (6.4.3)
@@ -56,16 +58,6 @@ GEM
       rack-protection (= 4.0.0)
       rack-session (>= 2.0.0, < 3)
       tilt (~> 2.0)
-    sqlite3 (2.2.0-aarch64-linux-gnu)
-    sqlite3 (2.2.0-aarch64-linux-musl)
-    sqlite3 (2.2.0-arm-linux-gnu)
-    sqlite3 (2.2.0-arm-linux-musl)
-    sqlite3 (2.2.0-arm64-darwin)
-    sqlite3 (2.2.0-x86-linux-gnu)
-    sqlite3 (2.2.0-x86-linux-musl)
-    sqlite3 (2.2.0-x86_64-darwin)
-    sqlite3 (2.2.0-x86_64-linux-gnu)
-    sqlite3 (2.2.0-x86_64-linux-musl)
     stringio (3.1.1)
     tilt (2.4.0)
 
@@ -75,6 +67,7 @@ PLATFORMS
   arm-linux-gnu
   arm-linux-musl
   arm64-darwin
+  ruby
   x86-linux-gnu
   x86-linux-musl
   x86_64-darwin
@@ -85,13 +78,13 @@ DEPENDENCIES
   debug
   dotenv
   ed25519
+  pg
   puma
   rackup
   rake
   rb-fsevent
   rerun
   sinatra
-  sqlite3
 
 RUBY VERSION
    ruby 3.3.5p100
