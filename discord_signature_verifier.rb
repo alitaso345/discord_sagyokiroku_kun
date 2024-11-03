@@ -15,7 +15,7 @@ class DiscordSignatureVerifer
       timestamp = request.get_header('HTTP_X_SIGNATURE_TIMESTAMP')
       signature = request.get_header('HTTP_X_SIGNATURE_ED25519')
     
-      return [400, {'Content-Type' => 'text/plain'}, ['Missing timestamp&signature header']] unless timestamp && signature
+      return [400, {'content-type' => 'text/plain'}, ['Missing timestamp&signature header']] unless timestamp && signature
     
       begin
         is_verified = @verify_key.verify([signature].pack('H*'), timestamp + body)
@@ -24,11 +24,11 @@ class DiscordSignatureVerifer
       end
 
       # 署名が無効な場合は401エラーを返す
-      return [401, {'Content-Type' => 'text/plain'}, ['Not verified']] unless is_verified
+      return [401, {'content-type' => 'text/plain'}, ['Not verified']] unless is_verified
   
       # DiscordのPINGリクエストの場合、ACKとしてtype 1の応答を返す
       if JSON.parse(body)['type'] == 1
-        return [200, { 'Content-Type' => 'application/json' }, [{ type: 1 }.to_json]]
+        return [200, { 'content-type' => 'application/json' }, [{ type: 1 }.to_json]]
       end
     end
 
