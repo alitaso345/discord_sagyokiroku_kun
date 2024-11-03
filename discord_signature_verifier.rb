@@ -8,11 +8,12 @@ class DiscordSignatureVerifer
   end
 
   def call(env)
+    request = Rack::Request.new(env)
+    body = request.body.read
+
     if env['PATH_INFO'] == '/interactions'
-      request = Rack::Request.new(env)
       timestamp = request.get_header('HTTP_X_SIGNATURE_TIMESTAMP')
       signature = request.get_header('HTTP_X_SIGNATURE_ED25519')
-      body = request.body.read
     
       return [400, {'Content-Type' => 'text/plain'}, ['Missing timestamp&signature header']] unless timestamp && signature
     
@@ -21,7 +22,7 @@ class DiscordSignatureVerifer
       rescue Ed25519::VerifyError
         is_verified = false
       end
-    
+
       # 署名が無効な場合は401エラーを返す
       return [401, {'Content-Type' => 'text/plain'}, ['Not verified']] unless is_verified
   
