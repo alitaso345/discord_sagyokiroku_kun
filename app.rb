@@ -2,7 +2,13 @@ require 'json'
 require 'pg'
 require 'time'
 
-db = PG.connect(dbname: ENV['DB_NAME'], host: ENV['DB_HOSTNAME'], user: ENV['DB_USER'], port: ENV['DB_PORT'])
+db = PG.connect(
+  dbname: ENV['DB_NAME'],
+  host: ENV['DB_HOSTNAME'],
+  user: ENV['DB_USER'],
+  port: ENV['DB_PORT'],
+  password: ENV['DB_PASSWORD']
+)
 
 get '/' do
   "Health check: #{Time.now}"
