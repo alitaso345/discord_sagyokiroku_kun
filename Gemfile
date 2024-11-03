@@ -5,7 +5,7 @@ ruby file: ".ruby-version"
 gem 'sinatra'
 gem 'dotenv'
 gem 'rackup'
-gem 'sqlite3'
+gem 'pg'
 gem 'ed25519'
 gem 'puma'
 gem 'rake'
