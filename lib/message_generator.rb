@@ -1,5 +1,4 @@
 require 'time'
-require 'debug'
 
 class MessageGenerator
   def initialize(user_name:)

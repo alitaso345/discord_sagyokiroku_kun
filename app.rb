@@ -46,8 +46,6 @@ post '/interactions' do
     user = request_body['user'] || request_body['member']['user']
     rows = db.exec("SELECT * FROM activity_logs WHERE user_id = $1 AND end_at IS NOT NULL", [user['id']])
     content = MessageGenerator.new(user_name: user['username']).daily_report_message(rows)
-
-    #TODO: dailyコマンドを登録するところからやる
   end
 
   content_type(:json)

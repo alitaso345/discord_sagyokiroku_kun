@@ -3,23 +3,36 @@ require 'pg'
 require 'httparty'
 require 'json'
 
-task :register_command do
+namespace :register_command do
   url = "https://discord.com/api/v10/applications/#{ENV['DISCORD_APPLICATION_ID']}/commands"
-  
-  body = {
-    name: 'touch',
-    type: 1,
-    description: '【開発用】作業記録開始/終了コマンド'
-  }.to_json
-  
   headers = {
     'Authorization': "Bot #{ENV['DISCORD_TOKEN']}",
     'Content-Type' => 'application/json'
   }
-  
-  res = HTTParty.post(url, body: body, headers: headers)
-  pp res
+
+  task :touch do
+    body = {
+      name: 'touch',
+      type: 1,
+      description: '【開発用】作業記録開始/終了コマンド'
+    }.to_json
+    
+    res = HTTParty.post(url, body: body, headers: headers)
+    pp res
+  end
+
+  task :worktime do
+    body = {
+      name: 'worktime',
+      type: 1,
+      description: '作業時間確認コマンド'
+    }.to_json
+    
+    res = HTTParty.post(url, body: body, headers: headers)
+    pp res
+  end
 end
+
 
 namespace :db do
   task :create do
