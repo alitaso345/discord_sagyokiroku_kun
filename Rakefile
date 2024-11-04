@@ -1,5 +1,5 @@
 require 'dotenv/load'
-require 'sqlite3'
+require 'pg'
 require 'httparty'
 require 'json'
 
@@ -23,16 +23,23 @@ end
 
 namespace :db do
   task :create do
-    db = SQLite3::Database.new('test.db')
-    db.execute <<-SQL
-      create table activity_logs (
+    db = PG.connect(
+      dbname: ENV['DB_NAME'],
+      host: ENV['DB_HOSTNAME'],
+      user: ENV['DB_USER'],
+      port: ENV['DB_PORT'],
+      password: ENV['DB_PASSWORD']
+    )
+    db.exec(<<~SQL
+      create table activity_logs(
         id bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
         user_id varchar(50) not null,
         start_at timestamptz not null,
         end_at timestamptz
       );
-
-      create index user_id_index on activity_logs(user_id);
+  
+      create index on activity_logs(user_id);
     SQL
+    )
   end
 end
