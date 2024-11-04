@@ -15,3 +15,7 @@ group :development do
   gem 'rb-fsevent'
   gem 'debug'
 end
+
+group :test do
+  gem 'rspec'
+end

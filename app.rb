@@ -1,6 +1,7 @@
 require 'json'
 require 'pg'
 require 'time'
+require_relative 'lib/message_generator'
 
 db = PG.connect(
   dbname: ENV['DB_NAME'],
@@ -41,6 +42,12 @@ post '/interactions' do
       db.exec_params('INSERT INTO activity_logs(user_id, start_at) VALUES($1, $2)', [user['id'], now])
       content = "@#{user['username']} 作業開始"
     end
+  elsif request_body['data']['name'] == 'worktime'
+    user = request_body['user'] || request_body['member']['user']
+    rows = db.exec("SELECT * FROM activity_logs WHERE user_id = $1 AND end_at IS NOT NULL", [user['id']])
+    content = MessageGenerator.new(user_name: user['username']).daily_report_message(rows)
+
+    #TODO: dailyコマンドを登録するところからやる
   end
 
   content_type(:json)
